@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --neon-lime: #ccff00;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-neon-lime: var(--neon-lime);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+/* Otimizações de performance para Lighthouse */
+* {
+  box-sizing: border-box;
+}
+
+/* Preload de fontes críticas */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+}
+
+/* Otimizações específicas para iOS */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Otimizações de rendering */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Melhora performance de animações */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Reduz layout shifts */
+.aspect-ratio-container {
+  position: relative;
+  width: 100%;
+}
+
+.aspect-ratio-container::before {
+  content: '';
+  display: block;
+  padding-top: 75%; /* 4:3 aspect ratio */
+}
+
+/* Garante que nada escape lateralmente */
+* {
+  box-sizing: border-box;
+}
+
+/* Garante que os ícones do Font Awesome não quebrem o alinhamento flex */
+.fa, .fas, .fab, .far, .fal, .fad {
+  display: inline-block;
+  line-height: 1;
+}
+
+* {
+  scroll-behavior: smooth;
 }

@@ -1,65 +1,133 @@
-import Image from "next/image";
+import dynamic from 'next/dynamic';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import StructuredData from '@/components/StructuredData';
+import { HeadingProvider } from '@/components/ui/Heading';
+import { 
+  generatePageMetadata, 
+  generateFAQStructuredData, 
+  generateServiceStructuredData,
+  generateCourseStructuredData,
+  generateAggregateRatingStructuredData
+} from '@/lib/seo';
+import { Metadata } from 'next';
+
+// Code Splitting - Componentes carregados dinamicamente para melhor performance
+const ProblemSolution = dynamic(() => import('@/components/ProblemSolution'), {
+  loading: () => <div className="h-96 bg-[#0a0a0a] animate-pulse" />,
+});
+
+const Testimonials = dynamic(() => import('@/components/Testimonials'), {
+  loading: () => <div className="h-96 bg-[#0f0f0f] animate-pulse" />,
+});
+
+const Services = dynamic(() => import('@/components/Services'), {
+  loading: () => <div className="h-96 bg-[#0a0a0a] animate-pulse" />,
+});
+
+const FAQ = dynamic(() => import('@/components/FAQ'), {
+  loading: () => <div className="h-96 bg-[#0f0f0f] animate-pulse" />,
+});
+
+const Footer = dynamic(() => import('@/components/Footer'), {
+  loading: () => <div className="h-32 bg-[#0a0a0a] animate-pulse" />,
+});
+
+// Generate page-specific metadata for the home page
+export const metadata: Metadata = generatePageMetadata(
+  'Transformação Corporal em 90 Dias',
+  'Método exclusivo de personal training que garante resultados em 90 dias. Transforme seu corpo com acompanhamento profissional e treinos personalizados.',
+  '/',
+  {
+    keywords: [
+      'personal trainer',
+      'transformação corporal',
+      'emagrecimento rápido',
+      'musculação',
+      'fitness',
+      'treino personalizado',
+      '90 dias',
+      'resultados garantidos',
+      'método exclusivo'
+    ]
+  }
+);
 
 export default function Home() {
+  // FAQ data for structured data
+  const faqData = [
+    {
+      question: 'Quanto tempo leva para ver resultados?',
+      answer: 'Com o método PRO TRAINER, você começa a ver mudanças visíveis em 30 dias. Em 90 dias, a transformação é completa. Nossos alunos relatam aumento de energia já na primeira semana.',
+    },
+    {
+      question: 'Preciso ter experiência na academia?',
+      answer: 'Não! O método é adaptado para todos os níveis. Se você é iniciante, começamos do zero. Se já treina, otimizamos seu treino atual para resultados máximos.',
+    },
+    {
+      question: 'Como funciona o acompanhamento?',
+      answer: 'Você recebe check-ins diários via WhatsApp, ajustes semanais no treino e suporte 24/7. Toda dúvida é respondida em até 2 horas. Você nunca fica sozinho nessa jornada.',
+    },
+    {
+      question: 'O plano nutricional está incluído?',
+      answer: 'Sim! Nos planos Trimestral e Anual, você recebe um plano nutricional completo, calculado especificamente para seus objetivos e biotipo. No plano Mensal, oferecemos orientações gerais.',
+    },
+    {
+      question: 'E se eu não conseguir seguir o plano?',
+      answer: 'Ajustamos! O método é flexível e se adapta à sua rotina. Se você tem limitações de tempo, criamos treinos mais eficientes. Se tem restrições alimentares, adaptamos a nutrição. O importante é a consistência, não a perfeição.',
+    },
+    {
+      question: 'Há garantia de resultados?',
+      answer: 'Sim! Oferecemos garantia de 30 dias. Se você seguir o método corretamente e não estiver satisfeito, devolvemos 100% do seu investimento. Mas a verdade é: seguindo o método, resultados são inevitáveis.',
+    },
+  ];
+
+  // Generate comprehensive structured data
+  const personalTrainingService = generateServiceStructuredData(
+    'Personal Training Exclusivo',
+    'Treino personalizado com acompanhamento individual para transformação corporal em 90 dias com método exclusivo e resultados garantidos.',
+    'PRO TRAINER',
+    '297.00',
+    'P90D'
+  );
+
+  const transformationCourse = generateCourseStructuredData(
+    'Método de Transformação Corporal em 90 Dias',
+    'Curso completo de transformação corporal com treinos personalizados, plano nutricional e acompanhamento profissional.',
+    'P90D',
+    '297.00'
+  );
+
+  const serviceRating = generateAggregateRatingStructuredData(
+    'PRO TRAINER - Personal Training',
+    4.9,
+    200,
+    5
+  );
+
+  const faqStructuredData = generateFAQStructuredData(faqData);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <StructuredData 
+        data={[
+          personalTrainingService, 
+          transformationCourse,
+          serviceRating,
+          faqStructuredData
+        ]} 
+      />
+      <HeadingProvider initialLevel={0}>
+        <main className="min-h-screen bg-[#0a0a0a] text-white">
+          <Header />
+          <Hero />
+          <ProblemSolution />
+          <Testimonials />
+          <Services />
+          <FAQ />
+          <Footer />
+        </main>
+      </HeadingProvider>
+    </>
   );
 }

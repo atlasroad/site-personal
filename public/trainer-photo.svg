@@ -1,0 +1,25 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="profileBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#2a2a2a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ccff00;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#b8e600;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="200" fill="url(#profileBg)"/>
+  <circle cx="200" cy="200" r="180" fill="none" stroke="url(#accent)" stroke-width="4"/>
+  
+  <!-- Simplified person silhouette -->
+  <circle cx="200" cy="160" r="40" fill="#ccff00" opacity="0.8"/>
+  <ellipse cx="200" cy="260" rx="60" ry="80" fill="#ccff00" opacity="0.8"/>
+  
+  <!-- Arms -->
+  <ellipse cx="140" cy="220" rx="20" ry="50" fill="#ccff00" opacity="0.8" transform="rotate(-20 140 220)"/>
+  <ellipse cx="260" cy="220" rx="20" ry="50" fill="#ccff00" opacity="0.8" transform="rotate(20 260 220)"/>
+  
+  <text x="200" y="360" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">PRO TRAINER</text>
+  <text x="200" y="380" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#ccff00">Personal Trainer Certificado</text>
+</svg>
